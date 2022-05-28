@@ -65,6 +65,36 @@ request get object recipe
   }
 }
 ```
+## request create new article
+```bash
+mutation {
+  createArticle(article: { title: "simple title", content: "simple desc"}) {
+    id,
+    title,
+    content
+  }
+}
+```
+## request update article
+```bash
+mutation {
+  updateArticle(article: { id: 4, title: "simple update", content: "simple desc update"}) {
+    id,
+    title,
+    content
+  }
+}
+```
+## request delete article
+```bash
+mutation {
+  deleteArticle(article: { id: 1 }) {
+    id,
+    title,
+    content
+  }
+}
+```
 ## Test
 
 ```bash

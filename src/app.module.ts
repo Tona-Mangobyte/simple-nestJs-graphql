@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { RecipesModule } from './recipes/recipes.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ArticleRepository } from './article/article.repository';
 import { ConfigModule, ConfigService } from 'nestjs-config';
 import { resolve } from "path";
+import { ArticleModule } from './article/article.module';
+import { ArticleRepository } from './article/article.repository';
 
 @Module({
   imports: [
@@ -13,8 +14,8 @@ import { resolve } from "path";
       useFactory: (config: ConfigService) => config.get('database'),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([ArticleRepository]),
     RecipesModule,
+    ArticleModule,
     /*GraphQLModule.forRoot({
       installSubscriptionHandlers: true,
       autoSchemaFile: 'schema.gql',
@@ -26,7 +27,7 @@ import { resolve } from "path";
       autoSchemaFile: true,
       playground: true,
       debug: true,
-      include: [RecipesModule],
+      include: [RecipesModule, ArticleModule],
     }),
   ],
 })
